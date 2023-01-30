@@ -1,0 +1,11 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args: ['build', '-t', '${_BASE_REPOSITORY}/${_IMAGE}:${_TAG}', '.']
+
+images:
+  - '${_BASE_REPOSITORY}/${_IMAGE}:${_TAG}'
+
+substitutions:
+  _BASE_REPOSITORY: asia-northeast1-docker.pkg.dev/butterthon-dev/terraform-gcp-gce-8000
+  _IMAGE: fastapi
+  _TAG: latest

@@ -1,9 +1,8 @@
-FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9-slim
+FROM python:3
+ENV PYTHONUNBUFFERED 1
 
-COPY ./requirements.txt /app/requirements.txt
+ADD . /src/
+RUN pip install -r /src/requirements.txt
 
-RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
-
-COPY ./app /app
-
+WORKDIR /src
 ENTRYPOINT ./entrypoint.sh
