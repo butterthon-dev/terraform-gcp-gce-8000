@@ -1,7 +1,8 @@
 import psutil
 
+
 bind = '0.0.0.0:8000'
-worker_class = 'uvicorn.workers.UvicornH11Worker'
+worker_class = 'uvicorn.workers.UvicornWorker'
 
 workers = 2 * psutil.cpu_count(logical=True) + 1
 
@@ -13,5 +14,3 @@ max_requests_jitter = 200
 keepalive = 620
 
 loglevel = 'debug'
-
-reload = True
