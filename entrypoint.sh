@@ -1,2 +1,5 @@
 #!/bin/bash
+python manage.py showmigrations
+python manage.py migrate
+python manage.py showmigrations
 python manage.py runserver 0.0.0.0:8000
