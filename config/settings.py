@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 
+import google.cloud.logging
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +28,7 @@ SECRET_KEY = 'django-insecure--wk=jy8%bmzcf73k#q2v!i#6&-l+4x#pty&j1is_!11sn$prj^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -141,11 +144,23 @@ LOGGING = {
     },
     'handlers': {
         'console': {
+            # 'class': 'google.cloud.logging.handlers.StructuredLogHandler',
+            # 'client': google.cloud.logging.Client(),
             'class': 'logging.StreamHandler',
             'formatter': 'verbose'
         },
     },
     'loggers': {
+        'gunicorn.access': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'gunicorn.error': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
         'api': {
             'handlers': ['console'],
             'level': 'INFO',
